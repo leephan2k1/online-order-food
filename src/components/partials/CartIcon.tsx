@@ -1,10 +1,17 @@
 import { Text, TouchableOpacity, View } from 'react-native';
-import { themeColors } from '~/common/constants';
+import { SCREENS, themeColors } from '~/common/constants';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamsList } from '~/common/interfaces/rootStackParamsList';
 
 export default function CartIcon() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
+
   return (
     <View className='absolute bottom-5 z-50 w-full'>
       <TouchableOpacity
+        onPress={() => navigation.navigate(SCREENS.Cart)}
         style={{ backgroundColor: themeColors.bgColor(1) }}
         className='flex-row justify-between items-center rounded-full mx-4 p-4 py-3 shadow-lg'
       >
