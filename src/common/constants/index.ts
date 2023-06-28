@@ -3,6 +3,7 @@ import { Featured } from '~/common/interfaces/featured.interface';
 export const SCREENS = {
   Home: 'Home',
   Restaurant: 'Restaurant',
+  Cart: 'Cart',
 };
 
 const pallets = [
