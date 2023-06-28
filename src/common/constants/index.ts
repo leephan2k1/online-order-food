@@ -78,12 +78,12 @@ export const categories = [
 ];
 
 export const featured: Featured = {
-  id: 1,
+  id: 912321,
   title: 'Hot and Spicy',
   description: 'soft and tender fried chicken',
   restaurants: [
     {
-      id: 1,
+      id: 4121,
       name: 'Papa Johns',
       image: require('../../../assets/images/pizza.png'),
       description: 'Hot and spicy pizzas',
@@ -95,21 +95,21 @@ export const featured: Featured = {
       category: 'Fast Food',
       dishes: [
         {
-          id: 1,
+          id: 23131,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
           image: require('../../../assets/images/pizzaDish.png'),
         },
         {
-          id: 2,
+          id: 73435,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
           image: require('../../../assets/images/pizzaDish.png'),
         },
         {
-          id: 3,
+          id: 623432,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
@@ -118,7 +118,7 @@ export const featured: Featured = {
       ],
     },
     {
-      id: 2,
+      id: 32131,
       name: 'Papa Johns',
       image: require('../../../assets/images/pizza.png'),
       description: 'Hot and spicy pizzas',
@@ -130,21 +130,21 @@ export const featured: Featured = {
       category: 'Fast Food',
       dishes: [
         {
-          id: 1,
+          id: 61412,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
           image: require('../../../assets/images/pizzaDish.png'),
         },
         {
-          id: 2,
+          id: 41241,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
           image: require('../../../assets/images/pizzaDish.png'),
         },
         {
-          id: 3,
+          id: 4363,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
@@ -153,7 +153,7 @@ export const featured: Featured = {
       ],
     },
     {
-      id: 3,
+      id: 512512,
       name: 'Papa Johns',
       image: require('../../../assets/images/pizza.png'),
       description: 'Hot and spicy pizzas',
@@ -165,21 +165,21 @@ export const featured: Featured = {
       category: 'Fast Food',
       dishes: [
         {
-          id: 1,
+          id: 7433,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
           image: require('../../../assets/images/pizzaDish.png'),
         },
         {
-          id: 2,
+          id: 1216,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,
           image: require('../../../assets/images/pizzaDish.png'),
         },
         {
-          id: 3,
+          id: 9672,
           name: 'pizza',
           description: 'cheezy garlic pizza',
           price: 10,

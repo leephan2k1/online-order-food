@@ -6,12 +6,22 @@ import { themeColors } from '~/common/constants';
 import DishRow from '~/components/shared/DishRow';
 import CartIcon from '~/components/partials/CartIcon';
 import { StatusBar } from 'expo-status-bar';
+import { useAppDispatch } from '~/store/hooks';
+import { useEffect } from 'react';
+import { setRestaurant } from '~/store/slices/restaurant.slice';
 
 export default function RestaurantScreen() {
   const navigation = useNavigation();
   const { params } =
     useRoute<RouteProp<{ prop: { restaurant: Restaurant } }, 'prop'>>();
   const { restaurant } = params;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (restaurant && restaurant.id) {
+      dispatch(setRestaurant(restaurant));
+    }
+  }, []);
 
   return (
     <View>

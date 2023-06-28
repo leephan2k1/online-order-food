@@ -3,10 +3,16 @@ import { SCREENS, themeColors } from '~/common/constants';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '~/common/interfaces/rootStackParamsList';
+import { useAppSelector } from '~/store/hooks';
+import { selectCartItems, selectCartTotal } from '~/store/slices/cart.slice';
 
 export default function CartIcon() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
+  const cartItems = useAppSelector(selectCartItems);
+  const cartTotal = useAppSelector(selectCartTotal);
+
+  if (cartItems.length === 0) return;
 
   return (
     <View className='absolute bottom-5 z-50 w-full'>
@@ -26,7 +32,7 @@ export default function CartIcon() {
           Xem giỏ hàng
         </Text>
 
-        <Text className='text-lg text-white font-extrabold'>$23</Text>
+        <Text className='text-lg text-white font-extrabold'>${cartTotal}</Text>
       </TouchableOpacity>
     </View>
   );

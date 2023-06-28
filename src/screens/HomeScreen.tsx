@@ -24,8 +24,8 @@ export default function HomeScreen() {
           <Categories />
 
           <View className='mt-4'>
-            {[featured, featured, featured].map((e) => {
-              return <FeaturedRow featured={e} key={e.id} />;
+            {[featured, featured, featured].map((e, index) => {
+              return <FeaturedRow featured={e} key={index} />;
             })}
           </View>
         </ScrollView>

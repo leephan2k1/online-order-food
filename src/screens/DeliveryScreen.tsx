@@ -1,13 +1,15 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { featured, SCREENS, themeColors } from '~/common/constants';
+import { SCREENS, themeColors } from '~/common/constants';
 import { useNavigation } from '@react-navigation/native';
 import MapView, { Marker } from 'react-native-maps';
 import { Phone, X } from 'react-native-feather';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '~/common/interfaces/rootStackParamsList';
+import { useAppSelector } from '~/store/hooks';
+import { selectRestaurant } from '~/store/slices/restaurant.slice';
 
 export default function DeliveryScreen() {
-  const restaurant = featured.restaurants[0];
+  const restaurant = useAppSelector(selectRestaurant);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
 
@@ -15,8 +17,8 @@ export default function DeliveryScreen() {
     <View className='flex-1'>
       <MapView
         initialRegion={{
-          latitude: restaurant.lat,
-          longitude: restaurant.lng,
+          latitude: restaurant?.lat || 0,
+          longitude: restaurant?.lng || 0,
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
@@ -25,11 +27,11 @@ export default function DeliveryScreen() {
       >
         <Marker
           coordinate={{
-            latitude: restaurant.lat,
-            longitude: restaurant.lng,
+            latitude: restaurant?.lat || 0,
+            longitude: restaurant?.lng || 0,
           }}
-          title={restaurant.name}
-          description={restaurant.description}
+          title={restaurant?.name}
+          description={restaurant?.description}
           pinColor={themeColors.bgColor(1)}
         />
       </MapView>
