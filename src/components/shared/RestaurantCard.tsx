@@ -1,6 +1,9 @@
 import { Image, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Restaurant } from '~/common/interfaces/restaurant.interface';
 import { themeColors } from '~/common/constants';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamsList } from '~/common/interfaces/rootStackParamsList';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -10,8 +13,15 @@ export default function RestaurantCard({
   restaurant,
   isLastItem,
 }: RestaurantCardProps) {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
+
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback
+      onPress={() => {
+        navigation.navigate('Restaurant', { restaurant });
+      }}
+    >
       <View
         style={{
           shadowColor: themeColors.bgColor(0.8),
