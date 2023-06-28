@@ -4,6 +4,8 @@ export const SCREENS = {
   Home: 'Home',
   Restaurant: 'Restaurant',
   Cart: 'Cart',
+  PreparingOrder: 'PreparingOrder',
+  Delivery: 'Delivery',
 };
 
 const pallets = [

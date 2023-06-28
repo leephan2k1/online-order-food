@@ -1,13 +1,16 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { featured, themeColors } from '~/common/constants';
+import { featured, SCREENS, themeColors } from '~/common/constants';
 import { useNavigation } from '@react-navigation/native';
 import { ArrowLeft, Minus } from 'react-native-feather';
 import CustomSafeArea from '~/components/shared/CustomSafeArea';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamsList } from '~/common/interfaces/rootStackParamsList';
 
 export default function CartScreen() {
   //dump data:
   const restaurant = featured.restaurants[0];
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
 
   return (
     <CustomSafeArea>
@@ -105,7 +108,7 @@ export default function CartScreen() {
           <View>
             <TouchableOpacity
               style={{ backgroundColor: themeColors.bgColor(1) }}
-              // onPress={()=> navigation.navigate('PreparingOrder')}
+              onPress={() => navigation.navigate(SCREENS.PreparingOrder)}
               className='p-3 rounded-full'
             >
               <Text className='text-white text-center font-bold text-lg'>
