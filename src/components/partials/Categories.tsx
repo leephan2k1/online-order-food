@@ -2,7 +2,7 @@ import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
 import { useEffect, useState } from 'react';
 import { getCategories } from '~/services/category.service';
-import { Category } from '~/common/interfaces/category.interface';
+import { Category } from '~/models/category.model';
 import { urlFor } from '../../../Sanity';
 
 export default function Categories() {

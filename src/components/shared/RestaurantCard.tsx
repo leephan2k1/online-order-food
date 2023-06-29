@@ -1,9 +1,10 @@
 import { Image, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Restaurant } from '~/common/interfaces/restaurant.interface';
+import { Restaurant } from '~/models/restaurant.model';
 import { themeColors } from '~/common/constants';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '~/common/interfaces/rootStackParamsList';
+import { urlFor } from '../../../Sanity';
 
 interface RestaurantCardProps {
   restaurant: Restaurant;
@@ -37,7 +38,10 @@ export default function RestaurantCard({
         }}
         className='bg-white rounded-3xl mb-2'
       >
-        <Image source={restaurant.image} className='h-36 w-64 rounded-t-3xl' />
+        <Image
+          source={{ uri: urlFor(restaurant.image).url() }}
+          className='h-36 w-64 rounded-t-3xl'
+        />
         <View className='px-3 pb-4 space-y-2'>
           <Text className='text-lg font-bold pt-2'>{restaurant.name}</Text>
           <View className='flex-row items-center space-x-1'>
@@ -46,13 +50,13 @@ export default function RestaurantCard({
               className='h-4 w-4'
             />
             <Text className='text-xs'>
-              <Text className='text-green-700'>{restaurant.stars}</Text>
+              <Text className='text-green-700'>{restaurant.rating}</Text>
               <Text className='text-gray-700'>
                 ({restaurant.reviews} review)
               </Text>
               ·
               <Text className='font-semibold text-gray-700'>
-                {restaurant.category}
+                {restaurant.type.name}
               </Text>
             </Text>
           </View>

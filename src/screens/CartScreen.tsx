@@ -12,8 +12,9 @@ import {
   selectCartTotal,
 } from '~/store/slices/cart.slice';
 import { useEffect, useState } from 'react';
-import { Dish } from '~/common/interfaces/dish.interface';
+import { Dish } from '~/models/dish.model';
 import { selectRestaurant } from '~/store/slices/restaurant.slice';
+import { urlFor } from '../../Sanity';
 
 export default function CartScreen() {
   const restaurant = useAppSelector(selectRestaurant);
@@ -21,7 +22,7 @@ export default function CartScreen() {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
   const cartItems = useAppSelector(selectCartItems);
-  const [groupedItems, setGroupedItems] = useState<{ [key: number]: Dish[] }>(
+  const [groupedItems, setGroupedItems] = useState<{ [key: string]: Dish[] }>(
     {},
   );
   const totalCost = useAppSelector(selectCartTotal);
@@ -31,14 +32,14 @@ export default function CartScreen() {
 
     //@ts-ignore
     const items = cartItems.reduce((gr, item) => {
-      if (gr[item.id]) {
-        gr[item.id].push(item);
+      if (gr[item._id]) {
+        gr[item._id].push(item);
       } else {
-        gr[item.id] = [item];
+        gr[item._id] = [item];
       }
 
       return gr;
-    }, {} as { [key: number]: Dish[] });
+    }, {} as { [key: string]: Dish[] });
 
     //@ts-ignore
     setGroupedItems(items);
@@ -100,9 +101,12 @@ export default function CartScreen() {
                 <Text style={{ color: themeColors.text }} className='font-bold'>
                   {items.length} x{' '}
                 </Text>
-                <Image className='h-14 w-14 rounded-full' source={item.image} />
+                <Image
+                  className='h-14 w-14 rounded-full'
+                  source={{ uri: urlFor(item.image).url() }}
+                />
                 <Text className='flex-1 font-bold text-gray-700'>
-                  {item?.name}
+                  {item.name}
                 </Text>
                 <Text className='font-semibold text-base'>${item?.price}</Text>
                 <TouchableOpacity
