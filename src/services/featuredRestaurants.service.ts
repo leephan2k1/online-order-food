@@ -1,6 +1,7 @@
 import sanityQuery from '~/services/sanity.query';
+import { Featured } from '~/models/featured.model';
 
-export const getFeaturedRestaurants = () => {
+export function getFeaturedRestaurants(): Promise<Featured[]> {
   return sanityQuery(`
         *[_type=='featured']{
         ...,
@@ -15,9 +16,9 @@ export const getFeaturedRestaurants = () => {
         }
       }
   `);
-};
+}
 
-export const getFeaturedResturantById = (id: string | number) => {
+export const getFeaturedRestaurantById = (id: string | number) => {
   return sanityQuery(
     `
         *[_type == 'featured' && _id == $id] {
