@@ -1,5 +1,5 @@
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { Featured } from '~/common/interfaces/featured.interface';
+import { Featured } from '~/models/featured.model';
 import { themeColors } from '~/common/constants';
 import RestaurantCard from '~/components/shared/RestaurantCard';
 
@@ -11,7 +11,7 @@ export default function FeaturedRow({ featured }: FeaturedRowProps) {
     <View>
       <View className='flex-row items-center justify-between'>
         <View>
-          <Text className='font-bold text-gray-500'>{featured.title}</Text>
+          <Text className='font-bold text-gray-500'>{featured.name}</Text>
           <Text className='text-sm text-gray-500'>{featured.description}</Text>
         </View>
 
@@ -34,7 +34,7 @@ export default function FeaturedRow({ featured }: FeaturedRowProps) {
           return (
             <RestaurantCard
               isLastItem={index === featured.restaurants.length - 1}
-              key={restaurant.id}
+              key={restaurant._id}
               restaurant={restaurant}
             />
           );

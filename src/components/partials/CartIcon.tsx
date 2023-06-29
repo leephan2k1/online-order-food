@@ -12,7 +12,7 @@ export default function CartIcon() {
   const cartItems = useAppSelector(selectCartItems);
   const cartTotal = useAppSelector(selectCartTotal);
 
-  if (cartItems.length === 0) return;
+  if (cartItems.length === 0) return null;
 
   return (
     <View className='absolute bottom-5 z-50 w-full'>

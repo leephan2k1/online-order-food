@@ -1,6 +1,6 @@
 import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { Restaurant } from '~/common/interfaces/restaurant.interface';
+import { Restaurant } from '~/models/restaurant.model';
 import { ArrowLeft, MapPin } from 'react-native-feather';
 import { themeColors } from '~/common/constants';
 import DishRow from '~/components/shared/DishRow';
@@ -9,6 +9,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useAppDispatch } from '~/store/hooks';
 import { useEffect } from 'react';
 import { setRestaurant } from '~/store/slices/restaurant.slice';
+import { urlFor } from '../../Sanity';
 
 export default function RestaurantScreen() {
   const navigation = useNavigation();
@@ -18,7 +19,7 @@ export default function RestaurantScreen() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (restaurant && restaurant.id) {
+    if (restaurant && restaurant._id) {
       dispatch(setRestaurant(restaurant));
     }
   }, []);
@@ -29,7 +30,10 @@ export default function RestaurantScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className='relative'>
-          <Image source={restaurant.image} className='w-full h-72' />
+          <Image
+            source={{ uri: urlFor(restaurant.image).url() }}
+            className='w-full h-72'
+          />
 
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -53,13 +57,13 @@ export default function RestaurantScreen() {
                   className='h-4 w-4'
                 />
                 <Text className='text-xs'>
-                  <Text className='text-green-700'>{restaurant.stars}</Text>
+                  <Text className='text-green-700'>{restaurant.rating}</Text>
                   <Text className='text-gray-700'>
                     ({restaurant.reviews} review)
                   </Text>{' '}
                   ·{' '}
                   <Text className='font-semibold text-gray-700'>
-                    {restaurant.category}
+                    {restaurant.type.name}
                   </Text>
                 </Text>
               </View>
@@ -80,7 +84,7 @@ export default function RestaurantScreen() {
           {restaurant.dishes &&
             restaurant.dishes.length > 0 &&
             restaurant.dishes.map((dish) => {
-              return <DishRow key={dish.id} dish={dish} />;
+              return <DishRow key={dish._id} dish={dish} />;
             })}
         </View>
       </ScrollView>

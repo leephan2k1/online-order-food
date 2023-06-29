@@ -3,11 +3,30 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomSafeArea from '~/components/shared/CustomSafeArea';
 import SearchBar from '~/components/partials/SearchBar';
 import Categories from '~/components/partials/Categories';
-import { featured } from '~/common/constants';
 import FeaturedRow from '~/components/shared/FeaturedRow';
+import { useEffect, useState } from 'react';
+import { getFeaturedRestaurants } from '~/services/featuredRestaurants.service';
+import { Featured } from '~/models/featured.model';
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
+  const [featuredRestaurants, setFeaturedRestaurants] = useState<Featured[]>(
+    [],
+  );
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const data = await getFeaturedRestaurants();
+
+        if (data) {
+          setFeaturedRestaurants(data);
+        }
+      } catch (e) {
+        console.log('error: ', e);
+      }
+    })();
+  }, []);
 
   return (
     <CustomSafeArea>
@@ -24,7 +43,7 @@ export default function HomeScreen() {
           <Categories />
 
           <View className='mt-4'>
-            {[featured, featured, featured].map((e, index) => {
+            {featuredRestaurants.map((e, index) => {
               return <FeaturedRow featured={e} key={index} />;
             })}
           </View>

@@ -1,5 +1,5 @@
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { Dish } from '~/common/interfaces/dish.interface';
+import { Dish } from '~/models/dish.model';
 import { themeColors } from '~/common/constants';
 import { Minus, Plus } from 'react-native-feather';
 import { useAppDispatch, useAppSelector } from '~/store/hooks';
@@ -8,13 +8,14 @@ import {
   removeFromCart,
   selectCartItemsById,
 } from '~/store/slices/cart.slice';
+import { urlFor } from '../../../Sanity';
 
 interface DishRowProps {
   dish: Dish;
 }
 export default function DishRow({ dish }: DishRowProps) {
   const totalItems = useAppSelector((state) =>
-    selectCartItemsById(state, dish.id),
+    selectCartItemsById(state, dish._id),
   );
 
   const dispatch = useAppDispatch();
@@ -32,7 +33,7 @@ export default function DishRow({ dish }: DishRowProps) {
       <Image
         className='rounded-3xl'
         style={{ height: 100, width: 100 }}
-        source={dish.image}
+        source={{ uri: urlFor(dish.image).url() }}
       />
 
       <View className='flex flex-1 space-y-3 pl-3'>

@@ -1,4 +1,4 @@
-import { Restaurant } from '~/common/interfaces/restaurant.interface';
+import { Restaurant } from '~/models/restaurant.model';
 import { ParamListBase } from '@react-navigation/native';
 
 export interface RootStackParamsList extends ParamListBase {

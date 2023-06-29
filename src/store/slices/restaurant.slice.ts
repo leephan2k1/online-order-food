@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Restaurant } from '~/common/interfaces/restaurant.interface';
+import { Restaurant } from '~/models/restaurant.model';
 import { RootState } from '~/store';
 
 const initialState: { restaurant: Restaurant | null } = {
