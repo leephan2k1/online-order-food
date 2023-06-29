@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Dish } from '~/common/interfaces/dish.interface';
+import { Dish } from '~/models/dish.model';
 import { RootState } from '~/store';
 
 const initialState: { items: Dish[] } = {
@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
     removeFromCart: (state, action: PayloadAction<Dish>) => {
       const clonedItems = Array.from(state.items);
       const deleteItemIndex = state.items.findIndex(
-        (i) => Number(i.id) === Number(action.payload.id),
+        (i) => String(i._id) === String(action.payload._id),
       );
 
       if (deleteItemIndex !== -1) {
@@ -34,12 +34,12 @@ export const cartSlice = createSlice({
 export const { addToCart, emptyCart, removeFromCart } = cartSlice.actions;
 
 export const selectCartItems = (state: RootState) => state.cart.items;
-export const selectIemId = (state: RootState, id: number) => id;
+export const selectIemId = (state: RootState, id: string) => id;
 
 export const selectCartItemsById = createSelector(
   [selectCartItems, selectIemId],
-  (items, id: number) => {
-    return items.filter((e) => e.id === id);
+  (items, id: string) => {
+    return items.filter((e) => e._id === id);
   },
 );
 
