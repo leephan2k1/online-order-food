@@ -5,13 +5,20 @@ import MapView, { Marker } from 'react-native-maps';
 import { Phone, X } from 'react-native-feather';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '~/common/interfaces/rootStackParamsList';
-import { useAppSelector } from '~/store/hooks';
+import { useAppDispatch, useAppSelector } from '~/store/hooks';
 import { selectRestaurant } from '~/store/slices/restaurant.slice';
+import { emptyCart } from '~/store/slices/cart.slice';
 
 export default function DeliveryScreen() {
+  const dispatch = useAppDispatch();
   const restaurant = useAppSelector(selectRestaurant);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamsList>>();
+
+  const handleCancelOrder = () => {
+    dispatch(emptyCart());
+    navigation.navigate(SCREENS.Home);
+  };
 
   return (
     <View className='flex-1'>
@@ -84,7 +91,7 @@ export default function DeliveryScreen() {
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={() => navigation.navigate(SCREENS.Home)}
+              onPress={() => handleCancelOrder()}
               className='bg-white p-2 rounded-full'
             >
               <X stroke={'red'} strokeWidth='5' />
